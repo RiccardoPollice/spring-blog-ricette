@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/resources :: head('edit category')"></head>
+
+<!-- Attributi : -->
+
+<body>
+<div class="container">
+
+    <h3 class="mt-3 mb-5">Add category: </h3>
+
+    <form class="row gy-3"
+          id="create-category"
+          method="post"
+          th:object="${category}"
+          th:action="@{/categories/create}">
+
+        <div class="col-6">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="title" th:field="*{name}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-primary" th:href="@{/categories/list}">Cancel</a>
+        </div>
+    </form>
+
+
+</div>
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>
